@@ -4,10 +4,46 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+    <!-- add font link -->
+    <link rel="stylesheet" href="style.css">
+    <title>5-Day Weather</title>
 </head>
 
 <body>
-    
+    <div class="jumbotron">
+       <div class="container">
+           <header class="text-center">Weather Dashboard</header>
+       </div>
+    </div>
+
+    <!-- content container -->
+    <div class="container">
+        <div class="row">
+            <!-- search column -->
+            <div class="col-3">
+                <h3>Search for a City:</h3>
+                <!-- input -->
+                <div>
+                    <input type="text" placeholder="Enter City Name Here">
+                    <div>
+                        <button>Search</button>
+                    </div>
+                </div>
+
+                <!-- city list -->
+                <div>City List</div>
+            </div>
+
+            <!-- weather info -->
+            <div class="col-9">
+                <div>Weather Container</div>
+                <div>Forecast Container</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>

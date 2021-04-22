@@ -11,39 +11,111 @@
 </head>
 
 <body>
-    <div class="jumbotron">
-       <div class="container">
-           <header class="text-center">Weather Dashboard</header>
-       </div>
-    </div>
+    <header class="jumbotron text-center">
+        <h1>Weather Dashboard</h1>
+    </header>
 
-    <!-- content container -->
-    <div class="container">
+    <main>
         <div class="row">
-            <!-- search column -->
-            <div class="col-3">
-                <h3>Search for a City:</h3>
-                <!-- input -->
-                <div>
-                    <input type="text" placeholder="Enter City Name Here">
-                    <div>
-                        <button>Search</button>
+            <!-- search form -->
+            <section class="col-12 col-lg-3" id="search-form">
+                <form id="searchCityForm">
+                    <label for="searchCity" class="col col-12">Search for a City</label>
+                    <div class="col col-12">
+                        <input type="text" id="searchCity">
+                        <button type="submit" id="searchCityForm">Submit</button>
+                    </div>
+                </form>
+                <li class="col col-12" id="searchedCityLi"></li>
+            </section>
+
+            <!-- current weather section -->
+            <section class="col-12 col-lg-9 d-flex d-lg-block" id="display-weather-info">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="card-title d-flex align-items-center">
+                            <span id="cityName">Name of City</span>
+                            <span id="currentDate">MM/DD/YYYY</span>
+                            <img src="" id="weatherIconToday">
+                        </h2>
+                        <p class="card-text">
+                            Temperature: <span id="tempToday">--</span>
+                        </p>
+                        <p class="card-text">
+                            Humidity: <span id="humidityToday">--</span>
+                        </p>
+                        <p class="card-text">
+                            Wind Speed: <span id="windSpeedToday">--</span>
+                        </p>
+                        <p class="card-text">
+                            UV Index: <span id="uvIndexToday">--</span>
+                        </p>
                     </div>
                 </div>
 
-                <!-- city list -->
-                <div>City List</div>
-            </div>
+                <!-- 5-day forecast section -->
+                <div>
+                    <h2 class="card-title d-flex align-itmes-center">5-Day Forecast:</h2>
+                    <div class="row justify-content-between">
+                        <!-- day 1 forecast -->
+                        <div class="col-sm-2 card-body">
+                            <p class="card-title" id="date1">MM/DD/YY</p>
+                            <p class="card-text">
+                                <img src="" class="weather-icon" id="weatherIconDay1">
+                            </p>
+                            <p class="card-text">Temp: <span id="tempDay1">--</span></p>
+                            <p class="card-text">Humidity: <span id="humidityDay1">--</span></p>
+                        </div>
 
-            <!-- weather info -->
-            <div class="col-9">
-                <div>Weather Container</div>
-                <div>Forecast Container</div>
-            </div>
+                        <!-- day 2 forecast -->
+                        <div class="col-sm-2 card-body">
+                            <p class="card-title" id="date2">MM/DD/YY</p>
+                            <p class="card-text">
+                                <img src="" class="weather-icon" id="weatherIconDay2">
+                            </p>
+                            <p class="card-text">Temp: <span id="tempDay2">--</span></p>
+                            <p class="card-text">Humidity: <span id="humidityDay2">--</span></p>
+                        </div>
+
+                        <!-- day 3 forecast -->
+                        <div class="col-sm-2 card-body">
+                            <p class="card-title" id="date3">MM/DD/YY</p>
+                            <p class="card-text">
+                                <img src="" class="weather-icon" id="weatherIconDay3">
+                            </p>
+                            <p class="card-text">Temp: <span id="tempDay3">--</span></p>
+                            <p class="card-text">Humidity: <span id="humidityDay3">--</span></p>
+                        </div>
+
+                        <!-- day 4 forecast -->
+                        <div class="col-sm-2 card-body">
+                            <p class="card-title" id="date4">MM/DD/YY</p>
+                            <p class="card-text">
+                                <img src="" class="weather-icon" id="weatherIconDay4">
+                            </p>
+                            <p class="card-text">Temp: <span id="tempDay4">--</span></p>
+                            <p class="card-text">Humidity: <span id="humidityDay4">--</span></p>
+                        </div>
+
+                        <!-- day 5 forecast -->
+                        <div class="col-sm-2 card-body">
+                            <p class="card-title" id="date5">MM/DD/YY</p>
+                            <p class="card-text">
+                                <img src="" class="weather-icon" id="weatherIconDay5">
+                            </p>
+                            <p class="card-text">Temp: <span id="tempDay5">--</span></p>
+                            <p class="card-text">Humidity: <span id="humidityDay5">--</span></p>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </div>
-    </div>
+    </main>
+
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

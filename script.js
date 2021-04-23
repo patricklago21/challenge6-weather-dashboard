@@ -61,13 +61,9 @@ var getForecast = function (lat, lon) {
     })
     .then(function (response) {
         for (var i = 1; i < 6; i++) {
-            // var unixTime = response.daily[i].dt;
-            // var date = moment.unix(unixTime).format("MM/DD/YY");
-            // $("#Date" + i).html(date);
-
-            var forecastDate = document.querySelector("#date" + i);
-            var today = moment() + i;
-            forecastDate.textContent = today.format("MMM Do YYYY");
+            var unixTime = response.daily[i].dt;
+            var date = moment.unix(unixTime).format("MM/DD/YY");
+            $("#Date" + i).html(date);
 
 
             var weatherIncoUrl = 'http://openweathermap.org/img/wn/' + response.daily[i].weather[0].icon + '@2x.png';

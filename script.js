@@ -3,15 +3,19 @@ var numOfCities = 5;
 var searchCityForm = $("#searchCityForm");
 var searchedCities = $("#searchedCityLi");
 
+var currentDate = document.querySelector("#currentDate");
+var today = moment();
+currentDate.textContent = today.format("MMM Do YYYY");
+
 var getCityWeather = function (searchCityName) {
     fetch('https://api.openweathermap.org/data/2.5/weather?q=' + searchCityName + '&appid=b4e179a8b169927bbbf8d46d7054d6b7' + '&units=imperial')
     .then (function (response) {
         if (response.ok) {
             return response.json().then(function (response) {
                 $("#cityName").html(response.name);
-                var unixTime = response.dt;
-                var date = moment.unix(unixTime).format("MM/DD/YY");
-                $("#currentdate").html(date);
+                // var unixTime = response.dt;
+                // var date = moment.unix(unixTime).format("MM/DD/YY");
+                // $("#currentdate").html(date);
 
                 var weatherIncoUrl = "http://openweathermap.org/img/wn/" + response.weather[0] + "@2x.png";
                 $("#weatherIconToday").attr("src", weatherIncoUrl);
@@ -57,9 +61,14 @@ var getForecast = function (lat, lon) {
     })
     .then(function (response) {
         for (var i = 1; i < 6; i++) {
-            var unixTime = response.daily[i].dt;
-            var date = moment.unix(unixTime).format("MM/DD/YY");
-            $("#Date" + i).html(date);
+            // var unixTime = response.daily[i].dt;
+            // var date = moment.unix(unixTime).format("MM/DD/YY");
+            // $("#Date" + i).html(date);
+
+            var forecastDate = document.querySelector("#date" + i);
+            var today = moment() + i;
+            forecastDate.textContent = today.format("MMM Do YYYY");
+
 
             var weatherIncoUrl = 'http://openweathermap.org/img/wn/' + response.daily[i].weather[0].icon + '@2x.png';
             $("#weatherIconDay" + i).attr("src", weatherIncoUrl);

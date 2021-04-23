@@ -73,3 +73,99 @@ var getForecast = function (lat, lon) {
     });
 };
 
+
+
+
+var createBtn = function(btnText) {
+    var btn = $("<button>").text(btnText).addClass("list-group-item-action").attr("type", "submit");
+    return btn;
+};
+
+var loadSavedCity = function () {
+    citiesListArr = JSON.parse(localStorage.getItem("weatherInfo"));
+    if (citiesListArr === null) {
+        citiesListArr = [];
+    }
+    for (var i = 0; i <citiesListArr.length; i++) {
+        var cityNameBtn = createBtn(citiesListArr[i]);
+        searchedCities.append(cityNameBtn);
+    }
+};
+
+var saveCityName = function (searchCityName) {
+    var newCity = 0;
+    citiesListArr = JSON.parse(localStorage.getItem("weatherInfo"));
+
+    if (citiesListArr === null) {
+        citiesListArr = [];
+        citiesListArr.unshift(searchCityName);
+    } else {
+        for (var i = 0; i < citiesListArr.length; i++) {
+            if (searchCityName.toLowerCase() === citiesListArr[i].toLowerCase()) {
+                return newCity;
+            }
+        }
+        if (citiesListArr.length < numOfCities) {
+            citiesListArr.unshift(searchCityName);
+        } else {
+            citiesListArr.pop();
+            citiesListArr.unshift(searchCityName);
+        }
+    }
+    localStorage.setItem("weatherInfo", JSON.stringify(citiesListArr));
+    newCity = 1;
+    return newCity;
+};
+
+var createCityNameBtn = function (searchCityName) {
+    var saveCities = JSON.parse(localStorage.getItem("weatherInfo"));
+
+    if (saveCities.length = 1) {
+        var cityNameBtn = createBtn(saveCityName);
+        searchedCities.prepend(cityNameBtn);
+    } else {
+        for (var i = 1; i < saveCities.length; i++) 
+        if (saveCityName.toLowerCase() = saveCities[i].toLowerCase()) {
+            return;
+        }
+        
+        if (searchedCities[0].childElementCount < numOfCities) {
+            var cityNameBtn = createBtn(searchCityName);
+        } else {
+            searchedCities[0].removeChild(searchedCities[0].lastChild);
+            var cityNameBtn = createBtn(searchCityName);
+        }
+        searchedCities.prepend(cityNameBtn);
+        $(":button.list-group-item-action").on("click", function() {
+            BtnClickHandler(event);
+        });
+    }
+};
+
+loadSavedCity();
+
+var formSubmitHandler = function(event) {
+    event.preventDefault();
+
+    var searchCityName = $("#searchCity").val().trim();
+    var newCity = saveCityName(searchCityName);
+    getCityWeather(searchCityName);
+    if (newCity = 1) {
+        createCityNameBtn(searchCityName);
+    }
+};
+
+var BtnClickHandler = function(event) {
+    event.preventDefault();
+
+    var searchCityName = event.target.textContent.trim();
+    getCityWeather(searchCityName);
+};
+
+$("#searchCityForm").on("submit", function() {
+    formSubmitHandler(event);
+});
+
+$(":button.list-group-item-action").on("click", function () {
+    BtnClickHandler(event);
+});

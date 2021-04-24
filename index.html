@@ -16,14 +16,14 @@
     </header>
 
     <main>
-        <div class="row">
+        <div class="row no-gutters">
             <!-- search form -->
-            <section class="col-12 col-lg-3" id="search-form">
+            <section class="col-12 col-lg-3 search-form" id="search-form">
                 <form id="searchCityForm">
-                    <label for="searchCity" class="col col-12">Search for a City</label>
+                    <label for="searchCity" class="col col-12 search-title">Search for a City</label>
                     <div class="col col-12">
                         <input type="text" id="searchCity">
-                        <button type="submit" id="searchCityForm">Submit</button>
+                        <button type="submit" id="searchCityForm" class="submit-btn">Submit</button>
                     </div>
                 </form>
                 <li class="col col-12" id="searchedCityEl"></li>
@@ -31,10 +31,10 @@
 
             <!-- current weather section -->
             <section class="col-12 col-lg-9 d-flex d-lg-block" id="display-weather-info">
-                <div class="card">
+                <div class="card today-weather">
                     <div class="card-body">
                         <h2 class="card-title d-flex align-items-center">
-                            <span id="cityName">Name of City</span>
+                            <span id="cityName">City</span>
                             <span id="currentDate" class="current-date">MM/DD/YYYY</span>
                         </h2>
                         <p class="card-text">
@@ -53,57 +53,57 @@
                 </div>
 
                 <!-- 5-day forecast section -->
-                <div>
+                <div class="card forecast-section">
                     <h2 class="card-title d-flex align-itmes-center">5-Day Forecast:</h2>
-                    <div class="row justify-content-between">
+                    <div class="row justify-content-around">
                         <!-- day 1 forecast -->
-                        <div class="col-sm-2 card-body">
-                            <p class="card-title" id="date1">MM/DD/YY</p>
+                        <div class="col-sm-2 card-body forecast-card">
+                            <p class="card-title date-display" id="date1">MM/DD/YY</p>
                             <p class="card-text">
                                 <img src="" class="weather-icon" id="weatherIconDay1">
                             </p>
-                            <p class="card-text">Temp: <span id="tempDay1">--</span></p>
-                            <p class="card-text">Humidity: <span id="humidityDay1">--</span></p>
+                            <p class="card-text forecast-text">Temp: <span id="tempDay1">--</span></p>
+                            <p class="card-text forecast-text">Humidity: <span id="humidityDay1">--</span></p>
                         </div>
 
                         <!-- day 2 forecast -->
-                        <div class="col-sm-2 card-body">
-                            <p class="card-title" id="date2">MM/DD/YY</p>
+                        <div class="col-sm-2 card-body forecast-card">
+                            <p class="card-title date-display" id="date2">MM/DD/YY</p>
                             <p class="card-text">
                                 <img src="" class="weather-icon" id="weatherIconDay2">
                             </p>
-                            <p class="card-text">Temp: <span id="tempDay2">--</span></p>
-                            <p class="card-text">Humidity: <span id="humidityDay2">--</span></p>
+                            <p class="card-text forecast-text">Temp: <span id="tempDay2">--</span></p>
+                            <p class="card-text forecast-text">Humidity: <span id="humidityDay2">--</span></p>
                         </div>
 
                         <!-- day 3 forecast -->
-                        <div class="col-sm-2 card-body">
-                            <p class="card-title" id="date3">MM/DD/YY</p>
+                        <div class="col-sm-2 card-body forecast-card">
+                            <p class="card-title date-display" id="date3">MM/DD/YY</p>
                             <p class="card-text">
                                 <img src="" class="weather-icon" id="weatherIconDay3">
                             </p>
-                            <p class="card-text">Temp: <span id="tempDay3">--</span></p>
-                            <p class="card-text">Humidity: <span id="humidityDay3">--</span></p>
+                            <p class="card-text forecast-text">Temp: <span id="tempDay3">--</span></p>
+                            <p class="card-text forecast-text">Humidity: <span id="humidityDay3">--</span></p>
                         </div>
 
                         <!-- day 4 forecast -->
-                        <div class="col-sm-2 card-body">
-                            <p class="card-title" id="date4">MM/DD/YY</p>
+                        <div class="col-sm-2 card-body forecast-card">
+                            <p class="card-title date-display" id="date4">MM/DD/YY</p>
                             <p class="card-text">
                                 <img src="" class="weather-icon" id="weatherIconDay4">
                             </p>
-                            <p class="card-text">Temp: <span id="tempDay4">--</span></p>
-                            <p class="card-text">Humidity: <span id="humidityDay4">--</span></p>
+                            <p class="card-text forecast-text">Temp: <span id="tempDay4">--</span></p>
+                            <p class="card-text forecast-text">Humidity: <span id="humidityDay4">--</span></p>
                         </div>
 
                         <!-- day 5 forecast -->
-                        <div class="col-sm-2 card-body">
-                            <p class="card-title" id="date5">MM/DD/YY</p>
+                        <div class="col-sm-2 card-body forecast-card">
+                            <p class="card-title date-display" id="date5">MM/DD/YY</p>
                             <p class="card-text">
                                 <img src="" class="weather-icon" id="weatherIconDay5">
                             </p>
-                            <p class="card-text">Temp: <span id="tempDay5">--</span></p>
-                            <p class="card-text">Humidity: <span id="humidityDay5">--</span></p>
+                            <p class="card-text forecast-text">Temp: <span id="tempDay5">--</span></p>
+                            <p class="card-text forecast-text">Humidity: <span id="humidityDay5">--</span></p>
                         </div>
                     </div>
                 </div>

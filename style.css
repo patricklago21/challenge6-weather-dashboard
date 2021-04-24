@@ -1,0 +1,55 @@
+body {
+    color: #0f3256;
+}
+
+li {
+    list-style-type: none;
+}
+
+.jumbotron {
+    background-color: #1652f0;
+    color: white;
+    padding: 40px 32px;
+}
+
+.today-weather {
+    background-color: #e9f6ff;
+    margin-bottom: 10px;
+}
+
+.forecast-section {
+    padding: 20px;
+    background-color: #e9f6ff;
+}
+
+.row {
+    padding: 5px;
+}
+
+.submit-btn {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: #e9f6ff;
+}
+
+.list-group-item-action {
+    margin-top: 5px;
+}
+
+.current-date {
+    margin-left: 15px;
+    font-size: 80%;
+}
+
+.forecast-card {
+    background-color: #1652f0;
+    border-radius: .25rem;
+}
+
+.date-display, .forecast-text {
+    color: white;
+}
+
+.search-title {
+    font-size: 25px;
+}

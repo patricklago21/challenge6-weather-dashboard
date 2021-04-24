@@ -1,24 +1,18 @@
-var citiesListArr = [];
+var citiesArr = [];
 var numOfCities = 5;
 var searchCityForm = $("#searchCityForm");
-var searchedCities = $("#searchedCityLi");
+var searchedCities = $("#searchedCityEl");
 
 var currentDate = document.querySelector("#currentDate");
 var today = moment();
 currentDate.textContent = today.format("MMM Do YYYY");
 
-var getCityWeather = function (searchCityName) {
+var cityWeatherPull = function (searchCityName) {
     fetch('https://api.openweathermap.org/data/2.5/weather?q=' + searchCityName + '&appid=b4e179a8b169927bbbf8d46d7054d6b7' + '&units=imperial')
     .then (function (response) {
         if (response.ok) {
             return response.json().then(function (response) {
                 $("#cityName").html(response.name);
-                // var unixTime = response.dt;
-                // var date = moment.unix(unixTime).format("MM/DD/YY");
-                // $("#currentdate").html(date);
-
-                //var weatherIncoUrl = "http://openweathermap.org/img/wn/" + response.weather[0] + "@2x.png";
-                //$("#weatherIconToday").attr("src", weatherIncoUrl);
                 $("#tempToday").html(response.main.temp + " \u00B0F");
                 $("#humidityToday").html(response.main.humidity + "%")
                 $("#windSpeedToday").html(response.wind.speed + " MPH");
@@ -26,16 +20,16 @@ var getCityWeather = function (searchCityName) {
                 var lat = response.coord.lat;
                 var lon = response.coord.lon;
 
-                getUVIndex(lat, lon);
-                getForecast(lat, lon);
+                uvPull(lat, lon);
+                forecastPull(lat, lon);
             });
         } else {
-            alert("Please provide a valid city name.");
+            alert("Please enter a valid city name.");
         }
     });
 };
 
-var getUVIndex = function (lat, lon) {
+var uvPull = function (lat, lon) {
     fetch('https://api.openweathermap.org/data/2.5/uvi?' + 'appid=b4e179a8b169927bbbf8d46d7054d6b7' + '&lat=' + lat + '&lon=' + lon + '&units=imperial')
     .then(function (response) {
         return response.json();
@@ -54,7 +48,7 @@ var getUVIndex = function (lat, lon) {
     });
 };
 
-var getForecast = function (lat, lon) {
+var forecastPull = function (lat, lon) {
     fetch('https://api.openweathermap.org/data/2.5/onecall?' + 'lat=' + lat + '&lon=' + lon + '&exclude=current,minutely,hourly' + '&appid=b4e179a8b169927bbbf8d46d7054d6b7' + '&units=imperial')
     .then(function (response) {
         return response.json();
@@ -66,8 +60,8 @@ var getForecast = function (lat, lon) {
             $("#date" + i).html(date);
 
 
-            var weatherIncoUrl = 'http://openweathermap.org/img/wn/' + response.daily[i].weather[0].icon + '@2x.png';
-            $("#weatherIconDay" + i).attr("src", weatherIncoUrl);
+            var weatherImg = 'http://openweathermap.org/img/wn/' + response.daily[i].weather[0].icon + '@2x.png';
+            $("#weatherIconDay" + i).attr("src", weatherImg);
 
             var temp = response.daily[i].temp.day + " \u00B0F";
             $("#tempDay" + i).html(temp);
@@ -86,38 +80,38 @@ var createBtn = function(btnText) {
     return btn;
 };
 
-var loadSavedCity = function () {
-    citiesListArr = JSON.parse(localStorage.getItem("weatherInfo"));
-    if (citiesListArr === null) {
-        citiesListArr = [];
+var loadCities = function () {
+    citiesArr = JSON.parse(localStorage.getItem("weatherInfo"));
+    if (citiesArr === null) {
+        citiesArr = [];
     }
-    for (var i = 0; i <citiesListArr.length; i++) {
-        var cityNameBtn = createBtn(citiesListArr[i]);
+    for (var i = 0; i <citiesArr.length; i++) {
+        var cityNameBtn = createBtn(citiesArr[i]);
         searchedCities.append(cityNameBtn);
     }
 };
 
 var saveCityName = function (searchCityName) {
     var newCity = 0;
-    citiesListArr = JSON.parse(localStorage.getItem("weatherInfo"));
+    citiesArr = JSON.parse(localStorage.getItem("weatherInfo"));
 
-    if (citiesListArr === null) {
-        citiesListArr = [];
-        citiesListArr.unshift(searchCityName);
+    if (citiesArr === null) {
+        citiesArr = [];
+        citiesArr.unshift(searchCityName);
     } else {
-        for (var i = 0; i < citiesListArr.length; i++) {
-            if (searchCityName.toLowerCase() === citiesListArr[i].toLowerCase()) {
+        for (var i = 0; i < citiesArr.length; i++) {
+            if (searchCityName.toLowerCase() === citiesArr[i].toLowerCase()) {
                 return newCity;
             }
         }
-        if (citiesListArr.length < numOfCities) {
-            citiesListArr.unshift(searchCityName);
+        if (citiesArr.length < numOfCities) {
+            citiesArr.unshift(searchCityName);
         } else {
-            citiesListArr.pop();
-            citiesListArr.unshift(searchCityName);
+            citiesArr.pop();
+            citiesArr.unshift(searchCityName);
         }
     }
-    localStorage.setItem("weatherInfo", JSON.stringify(citiesListArr));
+    localStorage.setItem("weatherInfo", JSON.stringify(citiesArr));
     newCity = 1;
     return newCity;
 };
@@ -142,35 +136,35 @@ var createCityNameBtn = function (searchCityName) {
         }
         searchedCities.prepend(cityNameBtn);
         $(":button.list-group-item-action").on("click", function() {
-            BtnClickHandler(event);
+            submitButtonClick(event);
         });
     }
 };
 
-loadSavedCity();
+loadCities();
 
-var formSubmitHandler = function(event) {
+var formSubmitEvent = function(event) {
     event.preventDefault();
 
     var searchCityName = $("#searchCity").val().trim();
     var newCity = saveCityName(searchCityName);
-    getCityWeather(searchCityName);
+    cityWeatherPull(searchCityName);
     if (newCity = 1) {
         createCityNameBtn(searchCityName);
     }
 };
 
-var BtnClickHandler = function(event) {
+var submitButtonClick = function(event) {
     event.preventDefault();
 
     var searchCityName = event.target.textContent.trim();
-    getCityWeather(searchCityName);
+    cityWeatherPull(searchCityName);
 };
 
 $("#searchCityForm").on("submit", function() {
-    formSubmitHandler(event);
+    formSubmitEvent(event);
 });
 
 $(":button.list-group-item-action").on("click", function () {
-    BtnClickHandler(event);
+    submitButtonClick(event);
 });

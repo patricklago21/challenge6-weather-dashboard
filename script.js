@@ -17,8 +17,8 @@ var getCityWeather = function (searchCityName) {
                 // var date = moment.unix(unixTime).format("MM/DD/YY");
                 // $("#currentdate").html(date);
 
-                var weatherIncoUrl = "http://openweathermap.org/img/wn/" + response.weather[0] + "@2x.png";
-                $("#weatherIconToday").attr("src", weatherIncoUrl);
+                //var weatherIncoUrl = "http://openweathermap.org/img/wn/" + response.weather[0] + "@2x.png";
+                //$("#weatherIconToday").attr("src", weatherIncoUrl);
                 $("#tempToday").html(response.main.temp + " \u00B0F");
                 $("#humidityToday").html(response.main.humidity + "%")
                 $("#windSpeedToday").html(response.wind.speed + " MPH");
@@ -63,7 +63,7 @@ var getForecast = function (lat, lon) {
         for (var i = 1; i < 6; i++) {
             var unixTime = response.daily[i].dt;
             var date = moment.unix(unixTime).format("MM/DD/YY");
-            $("#Date" + i).html(date);
+            $("#date" + i).html(date);
 
 
             var weatherIncoUrl = 'http://openweathermap.org/img/wn/' + response.daily[i].weather[0].icon + '@2x.png';
